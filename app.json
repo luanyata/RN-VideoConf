@@ -12,13 +12,48 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "dev.yata.videocall",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to make video calls.",
+        "NSMicrophoneUsageDescription": "This app uses the microphone to make video calls.",
+        "UIBackgroundModes": [
+          "audio",
+          "voip"
+        ],
+        "UIRequiresFullScreen": true,
+        "UIStatusBarHidden": true,
+        "UIViewControllerBasedStatusBarAppearance": false,
+        "bitcode": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "dev.yata.videocall",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.WAKE_LOCK",
+        "android.permission.VIBRATE",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.ACCESS_WIFI_STATE",
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.CHANGE_NETWORK_STATE",
+        "android.permission.CHANGE_WIFI_STATE",
+        "android.permission.DISABLE_KEYGUARD",
+        "android.permission.READ_PHONE_STATE",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.WRITE_EXTERNAL_STORAGE"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
