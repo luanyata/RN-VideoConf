@@ -1,31 +1,38 @@
 import { useNavigation } from '@react-navigation/native';
-import { Button, Text, View } from 'react-native';
+import { LogBox, Text, TouchableOpacity, View } from 'react-native';
+import { Agenda, AgendaEntry } from 'react-native-calendars';
+
+LogBox.ignoreAllLogs();
 
 
 type Meeting = {
   id: number;
   name: string;
   room: string;
+  date: string;
+  onPress?: () => void;
 }
 
 const meetings: Meeting[] = [
   {
     id: 1,
     name: 'Meeting 1',
-    room: 'test-0001-000'
+    room: 'test-0001-000',
+    date: '2024-05-09'
   },
   {
     id: 2,
     name: 'Meeting 2',
-    room: 'test-0001-000'
+    room: 'test-0001-000',
+    date: '2024-05-10'
   },
   {
     id: 3,
     name: 'Meeting 3',
-    room: 'test-0001-000'
+    room: 'test-0001-000',
+    date: '2024-05-11'
   }
 ];
-
 
 
 export const Home = () => {
@@ -35,22 +42,43 @@ export const Home = () => {
     navigate('Meeting', { room, name });
   }
 
-  return (
-    <View className="flex-1 justify-center items-center bg-slate-800">
+  const items = meetings.reduce((acc, meeting) => {
+    return {
+      ...acc,
+      [meeting.date]: [
+        ...(acc[meeting.date] || []),
+        {
+          name: meeting.name,
+          height: Math.max(50, Math.floor(Math.random() * 150)),
+          day: meeting.date,
+          onPress: () => handleJoin(meeting)
+        }
+      ]
+    }
+  }, {} as { [date: string]: AgendaEntry[] });
 
-      <Text className="text-white text-3xl mb-4">Join a meeting</Text>
-      <Text className="text-white text-xl mb-4">Select a meeting room</Text>
-      {meetings.map((meeting) => (
-        <View className="mb-4" key={meeting.id}>
-          <Button
-            color="white"
-            key={meeting.id}
-            onPress={() => handleJoin(meeting)}
-            title={meeting.name} />
-        </View>
-      ))}
+
+  return (
+
+    <View className='flex-1 pt-14 bg-white'>
+      <Agenda
+        items={items}
+        renderItem={(item) => {
+          return (
+            <TouchableOpacity className='flex-row p-4 mt-4 mr-4 bg-white gap-4 rounded-md' onPress={(item as unknown as Meeting)?.onPress}>
+              <View className='flex bg-rose-400 p-4 rounded-full'>
+                <Text className='text-white'>LL</Text>
+              </View>
+              <View>
+                <Text className='font-semibold text-lg'>{item.name}</Text>
+                <Text className='font-md color-zinc-500'>{item.day}</Text>
+              </View>
+            </TouchableOpacity>
+          )
+        }}
+      />
     </View>
   );
-};
+}
 
 

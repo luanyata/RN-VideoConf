@@ -1,6 +1,10 @@
 #  📸 React Native Jitsi Meet
 
 
+<p align="center">
+  <img src="./agenda.gif" width="350" title="hover text">
+</p>
+
 ## Instalação das dependências
 
 ```bash
